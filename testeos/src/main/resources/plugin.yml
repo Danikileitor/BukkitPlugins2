@@ -1,4 +1,24 @@
 name: testeos
 main: dnk.testeos.testeos.Main
 version: 1.0-SNAPSHOT
-api-version: 1.19.2
+api-version: 1.19
+author: Danikileitor
+description: Plugin para testear
+load: POSTWORLD
+prefix: Test
+commands:
+  testeo:
+    description: Comando para testear
+    aliases: [testeo]
+    usage: /testeo
+    permission: test.testeo
+    permission-message: You don't have the test.testeo permission.
+permissions:
+  test.testeo:
+    description: Access to the /campfire command.
+    default: op
+  test.*:
+    description: Access to all commands.
+    default: op
+    children:
+      test.testeo: true
