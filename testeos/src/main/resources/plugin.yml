@@ -1,6 +1,6 @@
 name: testeos
 main: dnk.testeos.Main
-version: 1.0-SNAPSHOT
+version: 0.3
 api-version: 1.19
 author: Danikileitor
 description: Plugin para testear
@@ -13,12 +13,22 @@ commands:
     usage: /testeo
     permission: test.testeo
     permission-message: You don't have the test.testeo permission.
+  maxhp:
+    description: Aumenta tu vida máxima
+    aliases: [maxhp]
+    usage: /maxhp [20]
+    permission: test.maxhp
+    permission-message: You don't have the test.maxhp permission.
 permissions:
   test.testeo:
-    description: Access to the /campfire command.
+    description: Access to the /testeo command.
+    default: op
+  test.maxhp:
+    description: Access to the /maxhp command.
     default: op
   test.*:
     description: Access to all commands.
     default: op
     children:
       test.testeo: true
+      test.maxhp: true
