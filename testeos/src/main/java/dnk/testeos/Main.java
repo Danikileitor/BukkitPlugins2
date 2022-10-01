@@ -196,16 +196,14 @@ public class Main extends JavaPlugin implements Listener {
       if (sender.hasPermission("test.knb")) {
         if (args.length == 0) {
           p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(1.0);
-          sender
-              .sendMessage(
-                  "Daño de retroceso por defecto: " + p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).getValue());
+          sender.sendMessage(
+              "Daño de retroceso por defecto: " + p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).getValue());
           return true;
         }
         if (args.length == 1) {
           p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(Double.parseDouble(args[0]));
-          sender
-              .sendMessage(
-                  "Daño de retroceso modificado: " + p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).getValue());
+          sender.sendMessage(
+              "Daño de retroceso modificado: " + p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).getValue());
           return true;
         }
         if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
