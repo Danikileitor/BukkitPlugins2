@@ -14,17 +14,47 @@ commands:
     permission: test.testeo
     permission-message: You don't have the test.testeo permission.
   maxhp:
-    description: Modifica tu vida máxima
+    description: Modifica la vida máxima
     aliases: [maxhp]
     usage: /maxhp [20] o /maxhp [jugador] [20]
     permission: test.maxhp
     permission-message: You don't have the test.maxhp permission.
+  extrahp:
+    description: Modifica la vida extra
+    aliases: [extrahp]
+    usage: /extrahp [2] o /extrahp [jugador] [2]
+    permission: test.extrahp
+    permission-message: You don't have the test.extrahp permission.
   speed:
-    description: Modifica tu velocidad
+    description: Modifica la velocidad
     aliases: [speed]
     usage: /speed [2] o /speed [jugador] [2]
     permission: test.speed
     permission-message: You don't have the test.speed permission.
+  fspeed:
+    description: Modifica la velocidad de vuelo
+    aliases: [fspeed]
+    usage: /fspeed [0.1] o /fspeed [jugador] [0.1]
+    permission: test.fspeed
+    permission-message: You don't have the test.fspeed permission.
+  atk:
+    description: Modifica el daño de ataque
+    aliases: [atk]
+    usage: /atk [1] o /atk [jugador] [1]
+    permission: test.atk
+    permission-message: You don't have the test.atk permission.
+  knb:
+    description: Modifica el daño de retroceso
+    aliases: [knb]
+    usage: /knb [1] o /knb [jugador] [1]
+    permission: test.knb
+    permission-message: You don't have the test.knb permission.
+  spa:
+    description: Modifica la velocidad de ataque
+    aliases: [spa]
+    usage: /spa [4] o /spa [jugador] [4]
+    permission: test.spa
+    permission-message: You don't have the test.spa permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -32,8 +62,23 @@ permissions:
   test.maxhp:
     description: Access to the /maxhp command.
     default: op
+  test.extrahp:
+    description: Access to the /extrahp command.
+    default: op
   test.speed:
     description: Access to the /speed command.
+    default: op
+  test.fspeed:
+    description: Access to the /fspeed command.
+    default: op
+  test.atk:
+    description: Access to the /fspeed command.
+    default: op
+  test.knb:
+    description: Access to the /fspeed command.
+    default: op
+  test.spa:
+    description: Access to the /fspeed command.
     default: op
   test.*:
     description: Access to all commands.
@@ -41,4 +86,9 @@ permissions:
     children:
       test.testeo: true
       test.maxhp: true
+      test.extrahp: true
       test.speed: true
+      test.fspeed: true
+      test.atk: true
+      test.knb: true
+      test.spa: true
