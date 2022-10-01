@@ -20,7 +20,7 @@ public class Main extends JavaPlugin implements Listener {
     LOGGER.info("Se desactiva el auto guardado");
     for (World w : Bukkit.getWorlds()) {
       w.setAutoSave(false);
-      LOGGER.info("F "+w);
+      LOGGER.info("F " + w);
     }
   }
 
@@ -30,7 +30,7 @@ public class Main extends JavaPlugin implements Listener {
     LOGGER.info("Se para el mundo");
     for (World w : Bukkit.getWorlds()) {
       Bukkit.getServer().unloadWorld(w, false);
-      LOGGER.info("F "+w);
+      LOGGER.info("F " + w);
     }
   }
 
@@ -41,5 +41,11 @@ public class Main extends JavaPlugin implements Listener {
     LOGGER.info(p.getDisplayName() + " ha entrado al server.");
     p.sendTitle("Bienvenido al server", p.getDisplayName(), 50, 300, 50);
     w.playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_2, 100, 1);
+    Bukkit.getScheduler().runTaskLater(this, () -> {
+      w.playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_1, 100, 1);
+    }, 100L);
+    Bukkit.getScheduler().runTaskLater(this, () -> {
+      w.playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_5, 100, 1);
+    }, 150L);
   }
 }
