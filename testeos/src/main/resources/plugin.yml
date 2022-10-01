@@ -1,6 +1,6 @@
 name: testeos
 main: dnk.testeos.Main
-version: 0.3
+version: 1.0
 api-version: 1.19
 author: Danikileitor
 description: Plugin para testear
@@ -14,11 +14,17 @@ commands:
     permission: test.testeo
     permission-message: You don't have the test.testeo permission.
   maxhp:
-    description: Aumenta tu vida máxima
+    description: Modifica tu vida máxima
     aliases: [maxhp]
-    usage: /maxhp [20]
+    usage: /maxhp [20] o /maxhp [jugador] [20]
     permission: test.maxhp
     permission-message: You don't have the test.maxhp permission.
+  speed:
+    description: Modifica tu velocidad
+    aliases: [speed]
+    usage: /speed [2] o /speed [jugador] [2]
+    permission: test.speed
+    permission-message: You don't have the test.speed permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -26,9 +32,13 @@ permissions:
   test.maxhp:
     description: Access to the /maxhp command.
     default: op
+  test.speed:
+    description: Access to the /speed command.
+    default: op
   test.*:
     description: Access to all commands.
     default: op
     children:
       test.testeo: true
       test.maxhp: true
+      test.speed: true

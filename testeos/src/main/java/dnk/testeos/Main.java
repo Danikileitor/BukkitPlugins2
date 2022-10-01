@@ -50,7 +50,7 @@ public class Main extends JavaPlugin implements Listener {
           p.chat("Casi me muero");
           p.damage(0);
           p.playEffect(EntityEffect.TOTEM_RESURRECT);
-          p.setHealth(20.0);
+          p.setHealth(p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
         }
       } else {
         sender.sendMessage("§4You don't have permission to use this command.");
@@ -59,11 +59,54 @@ public class Main extends JavaPlugin implements Listener {
     }
     if (command.getName().equalsIgnoreCase("maxhp")) {
       if (sender.hasPermission("test.maxhp")) {
-        if (args[0].length() > 0) {
-          p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Double.parseDouble(args[0]));
-        } else {
+        if (args.length == 0) {
           p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
+          sender.sendMessage("Máxima vida por defecto: " + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+          return true;
         }
+        if (args.length == 1) {
+          p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Double.parseDouble(args[0]));
+          sender.sendMessage("Máxima vida modificada: " + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          o.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Double.parseDouble(args[1]));
+          sender.sendMessage("La vida máxima de " + o.getDisplayName() + " ha sido modificada: "
+              + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+          return true;
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
+    if (command.getName().equalsIgnoreCase("speed")) {
+      if (sender.hasPermission("test.speed")) {
+        if (args.length == 0) {
+          p.setWalkSpeed(0.2f);
+          float s = p.getWalkSpeed()*10.0f;
+          sender.sendMessage("Velocidad por defecto: " + s);
+          return true;
+        }
+        if (args.length == 1) {
+          p.setWalkSpeed(Float.parseFloat(args[0]) / 10.0f);
+          float s = p.getWalkSpeed()*10.0f;
+          sender.sendMessage("Velocidad modificada: " + s);
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          o.setWalkSpeed(Float.parseFloat(args[1]) / 10.0f);
+          float s = o.getWalkSpeed()*10.0f;
+          sender.sendMessage("Velocidad de " + o.getDisplayName() + " modificada: " + s);
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
       } else {
         sender.sendMessage("§4You don't have permission to use this command.");
       }
