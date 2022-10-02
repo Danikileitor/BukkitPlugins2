@@ -639,6 +639,49 @@ public class Main extends JavaPlugin implements Listener {
       }
       return true;
     }
+    if (command.getName().equalsIgnoreCase("fire")) {
+      if (sender.hasPermission("test.fire")) {
+        if (args.length == 0 && p.isVisualFire() == true) {
+          p.setVisualFire(false);
+          sender.sendMessage("El fuego se ha extinguido");
+          return true;
+        }
+        if (args.length == 0 && p.isVisualFire() == false) {
+          p.setVisualFire(true);
+          sender.sendMessage("Cuidado que vas ardiendo");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("1") || args.length == 1 && args[0].equals("true")) {
+          p.setVisualFire(true);
+          sender.sendMessage("Cuidado que vas ardiendo");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("0") || args.length == 1 && args[0].equals("false")) {
+          p.setVisualFire(false);
+          sender.sendMessage("El fuego se ha extinguido");
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          if (args[1].equals("1") || args[1].equals("true")) {
+            o.setVisualFire(true);
+            sender.sendMessage("Cuidado que " + o.getDisplayName() + " va ardiendo");
+            return true;
+          }
+          if (args[1].equals("0") || args[1].equals("false")) {
+            o.setVisualFire(false);
+            sender.sendMessage(o.getDisplayName() + " se ha apagado");
+            return true;
+          }
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
     return false;
   }
 }

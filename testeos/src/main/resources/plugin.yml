@@ -115,6 +115,12 @@ commands:
     usage: /sss [0] o /sss [jugador] [0]
     permission: test.sss
     permission-message: You don't have the test.sss permission.
+  fire:
+    description: Activa o desactiva el fuego
+    aliases: [fire]
+    usage: /fire [0] o /fire [jugador] [0]
+    permission: test.fire
+    permission-message: You don't have the test.fire permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -170,6 +176,9 @@ permissions:
   test.sss:
     description: Access to the /sss command.
     default: op
+  test.fire:
+    description: Access to the /fire command.
+    default: op
   test.*:
     description: Access to all commands.
     default: op
@@ -192,3 +201,4 @@ permissions:
       test.god: true
       test.pick: true
       test.sss: true
+      test.fire: true
