@@ -596,6 +596,49 @@ public class Main extends JavaPlugin implements Listener {
       }
       return true;
     }
+    if (command.getName().equalsIgnoreCase("sss")) {
+      if (sender.hasPermission("test.sss")) {
+        if (args.length == 0 && p.isSilent() == true) {
+          p.setSilent(false);
+          sender.sendMessage("Ahora haces ruido");
+          return true;
+        }
+        if (args.length == 0 && p.isSilent() == false) {
+          p.setSilent(true);
+          sender.sendMessage("Ahora no haces ruido");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("1") || args.length == 1 && args[0].equals("true")) {
+          p.setSilent(true);
+          sender.sendMessage("Ahora no haces ruido");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("0") || args.length == 1 && args[0].equals("false")) {
+          p.setSilent(false);
+          sender.sendMessage("Ahora haces ruido");
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          if (args[1].equals("1") || args[1].equals("true")) {
+            o.setSilent(true);
+            sender.sendMessage(o.getDisplayName() + " ahora no hace ruido");
+            return true;
+          }
+          if (args[1].equals("0") || args[1].equals("false")) {
+            o.setSilent(false);
+            sender.sendMessage(o.getDisplayName() + " ahora hace ruido");
+            return true;
+          }
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
     return false;
   }
 }

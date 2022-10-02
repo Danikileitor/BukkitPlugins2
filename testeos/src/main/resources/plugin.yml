@@ -82,33 +82,39 @@ commands:
   nick:
     description: Modifica el nick
     aliases: [nick]
-    usage: /nick [nick] o [jugador] [nick]
+    usage: /nick [nick] o /nick [jugador] [nick]
     permission: test.nick
     permission-message: You don't have the test.nick permission.
   aire:
     description: Modifica el aguante de respiración
     aliases: [aire]
-    usage: /aire [15] o [jugador] [15]
+    usage: /aire [15] o /aire [jugador] [15]
     permission: test.aire
     permission-message: You don't have the test.aire permission.
   glow:
     description: Activa o desactiva el brillo
     aliases: [glow]
-    usage: /glow [0] o [jugador] [0]
+    usage: /glow [0] o /glow [jugador] [0]
     permission: test.glow
     permission-message: You don't have the test.glow permission.
   god:
     description: Activa o desactiva la invencibilidad
     aliases: [god]
-    usage: /god [0] o [jugador] [0]
+    usage: /god [0] o /god [jugador] [0]
     permission: test.god
     permission-message: You don't have the test.god permission.
   pick:
     description: Activa o desactiva la posibilidad de recoger objetos
     aliases: [pick]
-    usage: /pick [0] o [jugador] [0]
+    usage: /pick [0] o /pick [jugador] [0]
     permission: test.pick
     permission-message: You don't have the test.pick permission.
+  sss:
+    description: Activa o desactiva el silencio
+    aliases: [sss]
+    usage: /sss [0] o /sss [jugador] [0]
+    permission: test.sss
+    permission-message: You don't have the test.sss permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -161,6 +167,9 @@ permissions:
   test.pick:
     description: Access to the /pick command.
     default: op
+  test.sss:
+    description: Access to the /sss command.
+    default: op
   test.*:
     description: Access to all commands.
     default: op
@@ -182,3 +191,4 @@ permissions:
       test.glow: true
       test.god: true
       test.pick: true
+      test.sss: true
