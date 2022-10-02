@@ -21,21 +21,12 @@ public class Main extends JavaPlugin implements Listener {
   @Override
   public void onEnable() {
     Bukkit.getServer().getPluginManager().registerEvents(this, this);
-    LOGGER.info("Se desactiva el auto guardado");
-    for (World w : Bukkit.getWorlds()) {
-      w.setAutoSave(false);
-      LOGGER.info("F " + w);
-    }
+    LOGGER.info("Esto funca");
   }
 
   @Override
   public void onDisable() {
-    LOGGER.info("testeos disabled");
-    LOGGER.info("Se para el mundo");
-    for (World w : Bukkit.getWorlds()) {
-      Bukkit.getServer().unloadWorld(w, false);
-      LOGGER.info("F " + w);
-    }
+    LOGGER.info("Esto sa desactivao");
   }
 
   @EventHandler
@@ -467,6 +458,49 @@ public class Main extends JavaPlugin implements Listener {
             o.setRemainingAir(o.getMaximumAir());
           }
           return true;
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
+    if (command.getName().equalsIgnoreCase("glow")) {
+      if (sender.hasPermission("test.glow")) {
+        if (args.length == 0 && p.isGlowing() == true) {
+          p.setGlowing(false);
+          sender.sendMessage("Brillo desactivado");
+          return true;
+        }
+        if (args.length == 0 && p.isGlowing() == false) {
+          p.setGlowing(true);
+          sender.sendMessage("Brillo activado");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("1") || args.length == 1 && args[0].equals("true")) {
+          p.setGlowing(true);
+          sender.sendMessage("Brillo activado");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("0") || args.length == 1 && args[0].equals("false")) {
+          p.setGlowing(false);
+          sender.sendMessage("Brillo desactivado");
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          if (args[1].equals("1") || args[1].equals("true")) {
+            o.setGlowing(true);
+            sender.sendMessage("Brillo activado para " + o.getDisplayName());
+            return true;
+          }
+          if (args[1].equals("0") || args[1].equals("false")) {
+            o.setGlowing(false);
+            sender.sendMessage("Brillo desactivado para " + o.getDisplayName());
+            return true;
+          }
         } else {
           sender.sendMessage("§4Has introducido mal los parámetros del comando.");
         }

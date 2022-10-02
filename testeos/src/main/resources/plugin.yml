@@ -91,6 +91,12 @@ commands:
     usage: /aire [15] o [jugador] [15]
     permission: test.aire
     permission-message: You don't have the test.aire permission.
+  glow:
+    description: Activa o desactiva el brillo
+    aliases: [glow]
+    usage: /glow [0] o [jugador] [0]
+    permission: test.glow
+    permission-message: You don't have the test.glow permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -134,6 +140,9 @@ permissions:
   test.aire:
     description: Access to the /aire command.
     default: op
+  test.glow:
+    description: Access to the /glow command.
+    default: op
   test.*:
     description: Access to all commands.
     default: op
@@ -152,3 +161,4 @@ permissions:
       test.invisible: true
       test.nick: true
       test.aire: true
+      test.glow: true
