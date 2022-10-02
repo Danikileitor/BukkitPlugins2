@@ -43,18 +43,48 @@ commands:
     usage: /atk [1] o /atk [jugador] [1]
     permission: test.atk
     permission-message: You don't have the test.atk permission.
-  knb:
-    description: Modifica el daño de retroceso
-    aliases: [knb]
-    usage: /knb [1] o /knb [jugador] [1]
-    permission: test.knb
-    permission-message: You don't have the test.knb permission.
+  #knb:
+  #description: Modifica el daño de retroceso
+  #aliases: [knb]
+  #usage: /knb [1] o /knb [jugador] [1]
+  #permission: test.knb
+  #permission-message: You don't have the test.knb permission.
   spa:
     description: Modifica la velocidad de ataque
     aliases: [spa]
     usage: /spa [4] o /spa [jugador] [4]
     permission: test.spa
     permission-message: You don't have the test.spa permission.
+  fly:
+    description: Permite activar el vuelo
+    aliases: [fly]
+    usage: /fly [1|true] o /fly [jugador] [0|false]
+    permission: test.fly
+    permission-message: You don't have the test.fly permission.
+  hide:
+    description: Activa la invisibildad
+    aliases: [hide]
+    usage: /hide [jugador]
+    permission: test.hide
+    permission-message: You don't have the test.hide permission.
+  unhide:
+    description: Desactiva la invisibildad
+    aliases: [unhide]
+    usage: /unhide [jugador]
+    permission: test.unhide
+    permission-message: You don't have the test.unhide permission.
+  nick:
+    description: Modifica el nick
+    aliases: [nick]
+    usage: /nick [nick] o [jugador] [nick]
+    permission: test.nick
+    permission-message: You don't have the test.nick permission.
+  aire:
+    description: Modifica el aguante de respiración
+    aliases: [aire]
+    usage: /aire [15] o [jugador] [15]
+    permission: test.aire
+    permission-message: You don't have the test.aire permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -72,13 +102,28 @@ permissions:
     description: Access to the /fspeed command.
     default: op
   test.atk:
-    description: Access to the /fspeed command.
+    description: Access to the /atk command.
     default: op
-  test.knb:
-    description: Access to the /fspeed command.
-    default: op
+  #test.knb:
+  #description: Access to the /knb command.
+  #default: op
   test.spa:
-    description: Access to the /fspeed command.
+    description: Access to the /spa command.
+    default: op
+  test.fly:
+    description: Access to the /fly command.
+    default: op
+  test.hide:
+    description: Access to the /hide command.
+    default: op
+  test.unhide:
+    description: Access to the /unhide command.
+    default: op
+  test.nick:
+    description: Access to the /nick command.
+    default: op
+  test.aire:
+    description: Access to the /aire command.
     default: op
   test.*:
     description: Access to all commands.
@@ -90,5 +135,10 @@ permissions:
       test.speed: true
       test.fspeed: true
       test.atk: true
-      test.knb: true
+      #test.knb: true
       test.spa: true
+      test.fly: true
+      test.hide: true
+      test.unhide: true
+      test.nick: true
+      test.aire: true
