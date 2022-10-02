@@ -121,6 +121,18 @@ commands:
     usage: /fire [0] o /fire [jugador] [0]
     permission: test.fire
     permission-message: You don't have the test.fire permission.
+  lvlset:
+    description: Modifica el nivel
+    aliases: [lvlset]
+    usage: /lvlset [0] o /lvlset [jugador] [0]
+    permission: test.lvlset
+    permission-message: You don't have the test.lvlset permission.
+  lvladd:
+    description: Aumenta o reduce el nivel
+    aliases: [lvladd]
+    usage: /lvladd [0] o /lvladd [jugador] [0]
+    permission: test.lvladd
+    permission-message: You don't have the test.lvladd permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -179,6 +191,12 @@ permissions:
   test.fire:
     description: Access to the /fire command.
     default: op
+  test.lvlset:
+    description: Access to the /lvlset command.
+    default: op
+  test.lvladd:
+    description: Access to the /lvladd command.
+    default: op
   test.*:
     description: Access to all commands.
     default: op
@@ -202,3 +220,5 @@ permissions:
       test.pick: true
       test.sss: true
       test.fire: true
+      test.lvlset: true
+      test.lvladd: true

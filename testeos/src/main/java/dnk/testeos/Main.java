@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Main extends JavaPlugin implements Listener {
-  private static final Logger LOGGER = Logger.getLogger("testeos");
+  private static final Logger LOGGER = Logger.getLogger("Test");
 
   @Override
   public void onEnable() {
@@ -72,12 +72,12 @@ public class Main extends JavaPlugin implements Listener {
           sender.sendMessage("Vida máxima por defecto: " + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
           return true;
         }
-        if (args.length == 1) {
+        if (args.length == 1 && args[0].matches("[0-9]+")) {
           p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Double.parseDouble(args[0]));
           sender.sendMessage("Vida máxima modificada: " + p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
           return true;
         }
-        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9]+")) {
           Player o = Bukkit.getPlayer(args[0]);
           o.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Double.parseDouble(args[1]));
           sender.sendMessage("La vida máxima de " + o.getDisplayName() + " ha sido modificada: "
@@ -99,12 +99,12 @@ public class Main extends JavaPlugin implements Listener {
           sender.sendMessage("Obtienes vida extra: " + p.getAbsorptionAmount());
           return true;
         }
-        if (args.length == 1) {
+        if (args.length == 1 && args[0].matches("[0-9]+")) {
           p.setAbsorptionAmount(Double.parseDouble(args[0]));
           sender.sendMessage("Obtienes vida extra: " + p.getAbsorptionAmount());
           return true;
         }
-        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9]+")) {
           Player o = Bukkit.getPlayer(args[0]);
           o.setAbsorptionAmount(Double.parseDouble(args[1]));
           sender.sendMessage(o.getDisplayName() + " obtiene vida extra: " + o.getAbsorptionAmount());
@@ -126,13 +126,13 @@ public class Main extends JavaPlugin implements Listener {
           sender.sendMessage("Velocidad por defecto: " + s);
           return true;
         }
-        if (args.length == 1) {
+        if (args.length == 1 && args[0].matches("[0-9.]+")) {
           p.setWalkSpeed(Float.parseFloat(args[0]) / 10.0f);
           float s = p.getWalkSpeed() * 10.0f;
           sender.sendMessage("Velocidad modificada: " + s);
           return true;
         }
-        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9.]+")) {
           Player o = Bukkit.getPlayer(args[0]);
           o.setWalkSpeed(Float.parseFloat(args[1]) / 10.0f);
           float s = o.getWalkSpeed() * 10.0f;
@@ -154,12 +154,14 @@ public class Main extends JavaPlugin implements Listener {
           sender.sendMessage("Velocidad de vuelo por defecto: " + p.getFlySpeed());
           return true;
         }
-        if (args.length == 1 && Float.parseFloat(args[0]) >= 0.0f && Float.parseFloat(args[0]) <= 1.0f) {
+        if (args.length == 1 && args[0].matches("[0-9.]+") && Float.parseFloat(args[0]) >= 0.0f
+            && Float.parseFloat(args[0]) <= 1.0f) {
           p.setFlySpeed(Float.parseFloat(args[0]));
           sender.sendMessage("Velocidad de vuelo modificada: " + p.getFlySpeed());
           return true;
         }
-        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && Float.parseFloat(args[1]) >= 0.0f
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9.]+")
+            && Float.parseFloat(args[1]) >= 0.0f
             && Float.parseFloat(args[1]) <= 1.0f) {
           Player o = Bukkit.getPlayer(args[0]);
           o.setFlySpeed(Float.parseFloat(args[1]));
@@ -182,13 +184,13 @@ public class Main extends JavaPlugin implements Listener {
               .sendMessage("Daño de ataque por defecto: " + p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
           return true;
         }
-        if (args.length == 1) {
+        if (args.length == 1 && args[0].matches("[0-9.]+")) {
           p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(Double.parseDouble(args[0]));
           sender
               .sendMessage("Daño de ataque modificado: " + p.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
           return true;
         }
-        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9.]+")) {
           Player o = Bukkit.getPlayer(args[0]);
           o.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(Double.parseDouble(args[1]));
           sender.sendMessage("El daño de ataque de " + o.getDisplayName() + " ha sido modificado: "
@@ -212,7 +214,7 @@ public class Main extends JavaPlugin implements Listener {
        * p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).getValue());
        * return true;
        * }
-       * if (args.length == 1) {
+       * if (args.length == 1 && args[0].matches("[0-9.]+")) {
        * p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(Double.
        * parseDouble(args[0]));
        * sender.sendMessage(
@@ -220,7 +222,8 @@ public class Main extends JavaPlugin implements Listener {
        * p.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).getValue());
        * return true;
        * }
-       * if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+       * if (args.length == 2 && Bukkit.getPlayer(args[0]) != null &&
+       * args[1].matches("[0-9.]+")) {
        * Player o = Bukkit.getPlayer(args[0]);
        * o.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(Double.
        * parseDouble(args[1]));
@@ -246,13 +249,13 @@ public class Main extends JavaPlugin implements Listener {
               "Velocidad de ataque por defecto: " + p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).getValue());
           return true;
         }
-        if (args.length == 1) {
+        if (args.length == 1 && args[0].matches("[0-9.]+")) {
           p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(Double.parseDouble(args[0]));
           sender.sendMessage(
               "Velocidad de ataque modificada: " + p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).getValue());
           return true;
         }
-        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9.]+")) {
           Player o = Bukkit.getPlayer(args[0]);
           o.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(Double.parseDouble(args[1]));
           sender.sendMessage("La velocidad de ataque de " + o.getDisplayName() + " ha sido modificada: "
@@ -442,7 +445,7 @@ public class Main extends JavaPlugin implements Listener {
           }
           return true;
         }
-        if (args.length == 1) {
+        if (args.length == 1 && args[0].matches("[0-9]+")) {
           p.setMaximumAir(Integer.parseInt(args[0]) * 20);
           sender.sendMessage("Aguante de respiración modificado a " + p.getMaximumAir() / 20 + " segundos.");
           if (p.getRemainingAir() > p.getMaximumAir()) {
@@ -450,7 +453,7 @@ public class Main extends JavaPlugin implements Listener {
           }
           return true;
         }
-        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9]+")) {
           Player o = Bukkit.getPlayer(args[0]);
           o.setMaximumAir(Integer.parseInt(args[1]) * 20);
           sender.sendMessage("Aguante de respiración modificado a " + o.getMaximumAir() / 20 + " segundos.");
@@ -673,6 +676,48 @@ public class Main extends JavaPlugin implements Listener {
             sender.sendMessage(o.getDisplayName() + " se ha apagado");
             return true;
           }
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
+    if (command.getName().equalsIgnoreCase("lvlset")) {
+      if (sender.hasPermission("test.lvlset")) {
+        if (args.length == 1 && args[0].matches("[0-9]+")) {
+          p.setLevel(Integer.parseInt(args[0]));
+          sender.sendMessage("Tu nivel ahora es " + p.getLevel());
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("[0-9]+")) {
+          Player o = Bukkit.getPlayer(args[0]);
+          o.setLevel(Integer.parseInt(args[1]));
+          sender.sendMessage("El nivel de " + o.getDisplayName() + " ahora es " + o.getLevel());
+          return true;
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
+    if (command.getName().equalsIgnoreCase("lvladd")) {
+      if (sender.hasPermission("test.lvladd")) {
+        if (args.length == 1 && args[0].matches("-?[0-9]\\d*")) {
+          p.giveExpLevels(Integer.parseInt(args[0]));
+          sender.sendMessage("Tu nivel ahora es " + p.getLevel());
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null && args[1].matches("-?[0-9]\\d*")) {
+          Player o = Bukkit.getPlayer(args[0]);
+          o.giveExpLevels(Integer.parseInt(args[1]));
+          sender.sendMessage("El nivel de " + o.getDisplayName() + " ahora es " + o.getLevel());
+          return true;
         } else {
           sender.sendMessage("§4Has introducido mal los parámetros del comando.");
         }
