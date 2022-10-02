@@ -56,7 +56,7 @@ commands:
     permission: test.spa
     permission-message: You don't have the test.spa permission.
   fly:
-    description: Permite activar el vuelo
+    description: Permite activar o desactivar el vuelo
     aliases: [fly]
     usage: /fly [1|true] o /fly [jugador] [0|false]
     permission: test.fly
@@ -73,6 +73,12 @@ commands:
     usage: /unhide [jugador]
     permission: test.unhide
     permission-message: You don't have the test.unhide permission.
+  invisible:
+    description: Supuestamente activa o desactiva la invisibildad
+    aliases: [invisible]
+    usage: /invisible [0|false] o /invisible [jugador] [0|false]
+    permission: test.invisible
+    permission-message: You don't have the test.invisible permission.
   nick:
     description: Modifica el nick
     aliases: [nick]
@@ -119,6 +125,9 @@ permissions:
   test.unhide:
     description: Access to the /unhide command.
     default: op
+  test.invisible:
+    description: Access to the /invisible command.
+    default: op
   test.nick:
     description: Access to the /nick command.
     default: op
@@ -140,5 +149,6 @@ permissions:
       test.fly: true
       test.hide: true
       test.unhide: true
+      test.invisible: true
       test.nick: true
       test.aire: true

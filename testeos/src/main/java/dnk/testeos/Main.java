@@ -369,6 +369,49 @@ public class Main extends JavaPlugin implements Listener {
       }
       return true;
     }
+    if (command.getName().equalsIgnoreCase("invisible")) {
+      if (sender.hasPermission("test.invisible")) {
+        if (args.length == 0 && p.isInvisible() == true) {
+          p.setInvisible(false);
+          sender.sendMessage("Supuesta invisibilidad desactivada");
+          return true;
+        }
+        if (args.length == 0 && p.isInvisible() == false) {
+          p.setInvisible(true);
+          sender.sendMessage("Supuesta invisibilidad activada");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("1") || args.length == 1 && args[0].equals("true")) {
+          p.setInvisible(true);
+          sender.sendMessage("Supuesta invisibilidad activada");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("0") || args.length == 1 && args[0].equals("false")) {
+          p.setInvisible(false);
+          sender.sendMessage("Supuesta invisibilidad desactivada");
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          if (args[1].equals("1") || args[1].equals("true")) {
+            o.setInvisible(true);
+            sender.sendMessage("Supuesta invisibilidad activada para " + o.getDisplayName());
+            return true;
+          }
+          if (args[1].equals("0") || args[1].equals("false")) {
+            o.setInvisible(false);
+            sender.sendMessage("Supuesta invisibilidad desactivada para " + o.getDisplayName());
+            return true;
+          }
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
     if (command.getName().equalsIgnoreCase("nick")) {
       if (sender.hasPermission("test.nick")) {
         if (args.length == 0) {
@@ -403,17 +446,26 @@ public class Main extends JavaPlugin implements Listener {
         if (args.length == 0) {
           p.setMaximumAir(300);
           sender.sendMessage("Aguante de respiración modificado a " + p.getMaximumAir() / 20 + " segundos.");
+          if (p.getRemainingAir() > p.getMaximumAir()) {
+            p.setRemainingAir(p.getMaximumAir());
+          }
           return true;
         }
         if (args.length == 1) {
           p.setMaximumAir(Integer.parseInt(args[0]) * 20);
           sender.sendMessage("Aguante de respiración modificado a " + p.getMaximumAir() / 20 + " segundos.");
+          if (p.getRemainingAir() > p.getMaximumAir()) {
+            p.setRemainingAir(p.getMaximumAir());
+          }
           return true;
         }
         if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
           Player o = Bukkit.getPlayer(args[0]);
           o.setMaximumAir(Integer.parseInt(args[1]) * 20);
           sender.sendMessage("Aguante de respiración modificado a " + o.getMaximumAir() / 20 + " segundos.");
+          if (o.getRemainingAir() > o.getMaximumAir()) {
+            o.setRemainingAir(o.getMaximumAir());
+          }
           return true;
         } else {
           sender.sendMessage("§4Has introducido mal los parámetros del comando.");
