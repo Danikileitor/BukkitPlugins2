@@ -103,6 +103,12 @@ commands:
     usage: /god [0] o [jugador] [0]
     permission: test.god
     permission-message: You don't have the test.god permission.
+  pick:
+    description: Activa o desactiva la posibilidad de recoger objetos
+    aliases: [pick]
+    usage: /pick [0] o [jugador] [0]
+    permission: test.pick
+    permission-message: You don't have the test.pick permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -152,6 +158,9 @@ permissions:
   test.god:
     description: Access to the /god command.
     default: op
+  test.pick:
+    description: Access to the /pick command.
+    default: op
   test.*:
     description: Access to all commands.
     default: op
@@ -172,3 +181,4 @@ permissions:
       test.aire: true
       test.glow: true
       test.god: true
+      test.pick: true

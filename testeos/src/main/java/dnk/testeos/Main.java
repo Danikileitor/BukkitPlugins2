@@ -553,6 +553,49 @@ public class Main extends JavaPlugin implements Listener {
       }
       return true;
     }
+    if (command.getName().equalsIgnoreCase("pick")) {
+      if (sender.hasPermission("test.pick")) {
+        if (args.length == 0 && p.getCanPickupItems() == true) {
+          p.setCanPickupItems(false);
+          sender.sendMessage("Ahora no puedes recoger objetos");
+          return true;
+        }
+        if (args.length == 0 && p.getCanPickupItems() == false) {
+          p.setCanPickupItems(true);
+          sender.sendMessage("Ahora puedes recoger objetos");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("1") || args.length == 1 && args[0].equals("true")) {
+          p.setCanPickupItems(true);
+          sender.sendMessage("Ahora puedes recoger objetos");
+          return true;
+        }
+        if (args.length == 1 && args[0].equals("0") || args.length == 1 && args[0].equals("false")) {
+          p.setCanPickupItems(false);
+          sender.sendMessage("Ahora no puedes recoger objetos");
+          return true;
+        }
+        if (args.length == 2 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          if (args[1].equals("1") || args[1].equals("true")) {
+            o.setCanPickupItems(true);
+            sender.sendMessage(o.getDisplayName() + " ahora puede recoger objetos");
+            return true;
+          }
+          if (args[1].equals("0") || args[1].equals("false")) {
+            o.setCanPickupItems(false);
+            sender.sendMessage(o.getDisplayName() + " ahora no puede recoger objetos");
+            return true;
+          }
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
     return false;
   }
 }
