@@ -12,16 +12,36 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.player.PlayerJoinEvent;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 
 public class Main extends JavaPlugin implements Listener {
   private static final Logger LOGGER = Logger.getLogger("Test");
+  private static Economy econ = null;
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
 
   @Override
   public void onEnable() {
     Bukkit.getServer().getPluginManager().registerEvents(this, this);
     LOGGER.info("Esto funca");
+    if (!setupEconomy()) {
+      LOGGER.severe(String.format("[%s] - No Vault dependency found! Some features of this plugin may not work!", getDescription().getName()));
+      return;
+    }
   }
 
   @Override
@@ -717,6 +737,27 @@ public class Main extends JavaPlugin implements Listener {
           Player o = Bukkit.getPlayer(args[0]);
           o.giveExpLevels(Integer.parseInt(args[1]));
           sender.sendMessage("El nivel de " + o.getDisplayName() + " ahora es " + o.getLevel());
+          return true;
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
+    if (command.getName().equalsIgnoreCase("dinero")) {
+      if (sender.hasPermission("test.dinero")) {
+        if (args.length == 0) {
+          EconomyResponse dineros = econ.bankBalance(p.getDisplayName());
+          sender.sendMessage(String.format("Tienes %s", econ.format(dineros.balance)));
+          return true;
+        }
+        if (args.length == 1 && Bukkit.getPlayer(args[0]) != null) {
+          Player o = Bukkit.getPlayer(args[0]);
+          EconomyResponse dineros = econ.bankBalance(o.getDisplayName());
+          sender.sendMessage(String.format("%s tiene %s", o.getDisplayName(), econ.format(dineros.balance)));
           return true;
         } else {
           sender.sendMessage("§4Has introducido mal los parámetros del comando.");

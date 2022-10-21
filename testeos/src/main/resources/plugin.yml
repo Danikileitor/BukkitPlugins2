@@ -6,6 +6,7 @@ author: Danikileitor
 description: Plugin para testear
 load: POSTWORLD
 prefix: Test
+softdepend: [Vault]
 commands:
   testeo:
     description: Comando para testear
