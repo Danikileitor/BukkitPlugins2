@@ -134,6 +134,12 @@ commands:
     usage: /lvladd [0] o /lvladd [jugador] [0]
     permission: test.lvladd
     permission-message: You don't have the test.lvladd permission.
+  dinero:
+    description: Comprueba el dinero de un jugador
+    aliases: [dinero]
+    usage: /dinero [jugador]
+    permission: test.dinero
+    permission-message: You don't have the test.dinero permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -198,6 +204,9 @@ permissions:
   test.lvladd:
     description: Access to the /lvladd command.
     default: op
+  test.dinero:
+    description: Access to the /dinero command.
+    default: op
   test.*:
     description: Access to all commands.
     default: op
@@ -223,3 +232,4 @@ permissions:
       test.fire: true
       test.lvlset: true
       test.lvladd: true
+      test.dinero: true
