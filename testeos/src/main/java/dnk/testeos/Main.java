@@ -16,7 +16,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.player.PlayerJoinEvent;
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
 
 public class Main extends JavaPlugin implements Listener {
   private static final Logger LOGGER = Logger.getLogger("Test");
@@ -751,13 +750,13 @@ public class Main extends JavaPlugin implements Listener {
       if (sender.hasPermission("test.dinero")) {
         if (args.length == 0) {
           OfflinePlayer q = Bukkit.getOfflinePlayer(p.getUniqueId());
-          String sufix = econ.getBalance(q)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+          String sufix = econ.getBalance(q)==1.0 ? econ.currencyNameSingular() : econ.currencyNamePlural();
           sender.sendMessage(String.format("Tienes %s %s.", econ.getBalance(q), sufix));
           return true;
         }
         if (args.length == 1 && (Bukkit.getPlayer(args[0]) != null || Bukkit.getOfflinePlayer(args[0]) != null)) {
           OfflinePlayer o = Bukkit.getOfflinePlayer(args[0]);
-          String sufix = econ.getBalance(o)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+          String sufix = econ.getBalance(o)==1.0 ? econ.currencyNameSingular() : econ.currencyNamePlural();
           sender.sendMessage(String.format("%s tiene %s %s.", o.getName(), econ.getBalance(o), sufix));
           return true;
         } else {
@@ -781,9 +780,9 @@ public class Main extends JavaPlugin implements Listener {
           if(econ.getBalance(p)>=dineros){
             econ.withdrawPlayer(p, dineros);
             econ.depositPlayer(o, dineros);
-            String psufix = econ.getBalance(p)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
-            String osufix = econ.getBalance(o)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
-            String sufix = dineros==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+            String psufix = econ.getBalance(p)==1.0 ? econ.currencyNameSingular() : econ.currencyNamePlural();
+            String osufix = econ.getBalance(o)==1.0 ? econ.currencyNameSingular() : econ.currencyNamePlural();
+            String sufix = dineros==1.0 ? econ.currencyNameSingular() : econ.currencyNamePlural();
             sender.sendMessage(String.format("Le has pagado %s %s a %s y te has quedado con %s %s.", dineros, sufix, o.getName(), econ.getBalance(p), psufix));
             o.sendMessage(String.format("%s te ha pagado %s %s, ahora tienes %s %s.", p.getName(), dineros, sufix, econ.getBalance(o), osufix));
           }
