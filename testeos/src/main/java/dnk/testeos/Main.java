@@ -16,6 +16,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.player.PlayerJoinEvent;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 
 public class Main extends JavaPlugin implements Listener {
   private static final Logger LOGGER = Logger.getLogger("Test");
@@ -758,6 +759,37 @@ public class Main extends JavaPlugin implements Listener {
           OfflinePlayer o = Bukkit.getOfflinePlayer(args[0]);
           String sufix = econ.getBalance(o)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
           sender.sendMessage(String.format("%s tiene %s %s.", o.getName(), econ.getBalance(o), sufix));
+          return true;
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
+    if (command.getName().equalsIgnoreCase("pagar")) {
+      if (sender.hasPermission("test.pagar")) {
+        if (args.length != 2) {
+          sender.sendMessage("§4Tienes que indicar a quien vas a pagar y cuanto vas a pagar.");
+          return true;
+        }
+        else if (Bukkit.getPlayer(args[0]) != null) {
+          Double dineros = Double.valueOf(args[1])>0 ? Double.valueOf(args[1]) : Double.valueOf(args[1])*-1;
+          Player o = Bukkit.getPlayer(args[0]);
+          if(econ.getBalance(p)>=dineros){
+            econ.withdrawPlayer(p, dineros);
+            econ.depositPlayer(o, dineros);
+            String psufix = econ.getBalance(p)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+            String osufix = econ.getBalance(o)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+            String sufix = dineros==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+            sender.sendMessage(String.format("Le has pagado %s %s a %s y te has quedado con %s %s.", dineros, sufix, o.getName(), econ.getBalance(p), psufix));
+            o.sendMessage(String.format("%s te ha pagado %s %s, ahora tienes %s %s.", p.getName(), dineros, sufix, econ.getBalance(o), osufix));
+          }
+          else{
+            sender.sendMessage("§4No tienes dinero suficiente para hacer el pago.");
+          }
           return true;
         } else {
           sender.sendMessage("§4Has introducido mal los parámetros del comando.");

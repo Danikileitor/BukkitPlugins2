@@ -140,73 +140,61 @@ commands:
     usage: /dinero [jugador]
     permission: test.dinero
     permission-message: You don't have the test.dinero permission.
+  pagar:
+    description: Paga una cantidad de dinero a un jugador
+    aliases: [pagar]
+    usage: /pagar [jugador] [cantidad]
+    permission: test.pagar
+    permission-message: You don't have the test.pagar permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
-    default: op
   test.maxhp:
     description: Access to the /maxhp command.
-    default: op
   test.extrahp:
     description: Access to the /extrahp command.
-    default: op
   test.speed:
     description: Access to the /speed command.
-    default: op
   test.fspeed:
     description: Access to the /fspeed command.
-    default: op
   test.atk:
     description: Access to the /atk command.
-    default: op
   #test.knb:
   #description: Access to the /knb command.
-  #default: op
   test.spa:
     description: Access to the /spa command.
-    default: op
   test.fly:
     description: Access to the /fly command.
-    default: op
   test.hide:
     description: Access to the /hide command.
-    default: op
   test.unhide:
     description: Access to the /unhide command.
-    default: op
   test.invisible:
     description: Access to the /invisible command.
-    default: op
   test.nick:
     description: Access to the /nick command.
-    default: op
   test.aire:
     description: Access to the /aire command.
-    default: op
   test.glow:
     description: Access to the /glow command.
-    default: op
   test.god:
     description: Access to the /god command.
-    default: op
   test.pick:
     description: Access to the /pick command.
-    default: op
   test.sss:
     description: Access to the /sss command.
-    default: op
   test.fire:
     description: Access to the /fire command.
-    default: op
   test.lvlset:
     description: Access to the /lvlset command.
-    default: op
   test.lvladd:
     description: Access to the /lvladd command.
-    default: op
   test.dinero:
     description: Access to the /dinero command.
-    default: op
+    default: true
+  test.pagar:
+    description: Access to the /pagar command.
+    default: true
   test.*:
     description: Access to all commands.
     default: op
@@ -233,3 +221,4 @@ permissions:
       test.lvlset: true
       test.lvladd: true
       test.dinero: true
+      test.pagar: true
