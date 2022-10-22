@@ -146,6 +146,12 @@ commands:
     usage: /pagar [jugador] [cantidad]
     permission: test.pagar
     permission-message: You don't have the test.pagar permission.
+  dardinero:
+    description: Da una cantidad de dinero a un jugador
+    aliases: [dardinero]
+    usage: /dardinero [jugador] [cantidad]
+    permission: test.dardinero
+    permission-message: You don't have the test.dardinero permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -195,6 +201,9 @@ permissions:
   test.pagar:
     description: Access to the /pagar command.
     default: true
+  test.dardinero:
+    description: Access to the /dardinero command.
+    default: true
   test.*:
     description: Access to all commands.
     default: op
@@ -222,3 +231,4 @@ permissions:
       test.lvladd: true
       test.dinero: true
       test.pagar: true
+      test.dardinero: true
