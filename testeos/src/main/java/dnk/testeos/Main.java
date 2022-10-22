@@ -1,9 +1,9 @@
 package dnk.testeos;
 
 import java.util.logging.Logger;
-
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
@@ -16,7 +16,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.player.PlayerJoinEvent;
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
 
 public class Main extends JavaPlugin implements Listener {
   private static final Logger LOGGER = Logger.getLogger("Test");
@@ -36,8 +35,8 @@ public class Main extends JavaPlugin implements Listener {
 
   @Override
   public void onEnable() {
-    Bukkit.getServer().getPluginManager().registerEvents(this, this);
     LOGGER.info("Esto funca");
+    Bukkit.getServer().getPluginManager().registerEvents(this, this);
     if (!setupEconomy()) {
       LOGGER.severe(String.format("[%s] - No Vault dependency found! Some features of this plugin may not work!", getDescription().getName()));
       return;
@@ -750,14 +749,15 @@ public class Main extends JavaPlugin implements Listener {
     if (command.getName().equalsIgnoreCase("dinero")) {
       if (sender.hasPermission("test.dinero")) {
         if (args.length == 0) {
-          EconomyResponse dineros = econ.bankBalance(p.getDisplayName());
-          sender.sendMessage(String.format("Tienes %s", econ.format(dineros.balance)));
+          OfflinePlayer q = Bukkit.getOfflinePlayer(p.getUniqueId());
+          String sufix = econ.getBalance(q)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+          sender.sendMessage(String.format("Tienes %s %s.", econ.getBalance(q), sufix));
           return true;
         }
-        if (args.length == 1 && Bukkit.getPlayer(args[0]) != null) {
-          Player o = Bukkit.getPlayer(args[0]);
-          EconomyResponse dineros = econ.bankBalance(o.getDisplayName());
-          sender.sendMessage(String.format("%s tiene %s", o.getDisplayName(), econ.format(dineros.balance)));
+        if (args.length == 1 && (Bukkit.getPlayer(args[0]) != null || Bukkit.getOfflinePlayer(args[0]) != null)) {
+          OfflinePlayer o = Bukkit.getOfflinePlayer(args[0]);
+          String sufix = econ.getBalance(o)==1.0 ? new String(econ.currencyNameSingular()) : new String(econ.currencyNamePlural());
+          sender.sendMessage(String.format("%s tiene %s %s.", o.getName(), econ.getBalance(o), sufix));
           return true;
         } else {
           sender.sendMessage("§4Has introducido mal los parámetros del comando.");
