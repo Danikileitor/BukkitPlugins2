@@ -823,8 +823,31 @@ public class Main extends JavaPlugin implements Listener {
       }
       return true;
     }
-    return false;
-  }
+    if (command.getName().equalsIgnoreCase("quitardinero")) {
+      if (sender.hasPermission("test.quitardinero")) {
+        if (args.length != 2) {
+          sender.sendMessage("§4Tienes que indicar a quien vas a darle dinero y cuanto vas a darle.");
+          return true;
+        }
+        else if (Bukkit.getPlayer(args[0]) != null) {
+          Double dineros = Double.valueOf(args[1])>0 ? Double.valueOf(args[1]) : Double.valueOf(args[1])*-1;
+          Player o = Bukkit.getPlayer(args[0]);
+          dineros = dineros>econ.getBalance(o) ? econ.getBalance(o) : dineros;
+          econ.withdrawPlayer(o, dineros);
+          String osufix = econ.getBalance(o)==1.0 ? econ.currencyNameSingular() : econ.currencyNamePlural();
+          String sufix = dineros==1.0 ? econ.currencyNameSingular() : econ.currencyNamePlural();
+          sender.sendMessage(String.format("Le has quitado %s %s a %s y ahora tiene %s %s.", dineros, sufix, o.getName(), econ.getBalance(o), osufix));
+          o.sendMessage(String.format("%s te ha quitado %s %s, ahora tienes %s %s.", p.getName(), dineros, sufix, econ.getBalance(o), osufix));
+          return true;
+        } else {
+          sender.sendMessage("§4Has introducido mal los parámetros del comando.");
+        }
+        return true;
+      } else {
+        sender.sendMessage("§4You don't have permission to use this command.");
+      }
+      return true;
+    }
     return false;
   }
 }

@@ -152,6 +152,12 @@ commands:
     usage: /dardinero [jugador] [cantidad]
     permission: test.dardinero
     permission-message: You don't have the test.dardinero permission.
+  quitardinero:
+    description: Da una cantidad de dinero a un jugador
+    aliases: [quitardinero]
+    usage: /quitardinero [jugador] [cantidad]
+    permission: test.quitardinero
+    permission-message: You don't have the test.quitardinero permission.
 permissions:
   test.testeo:
     description: Access to the /testeo command.
@@ -203,7 +209,8 @@ permissions:
     default: true
   test.dardinero:
     description: Access to the /dardinero command.
-    default: true
+  test.quitardinero:
+    description: Access to the /quitardinero command.
   test.*:
     description: Access to all commands.
     default: op
@@ -232,3 +239,4 @@ permissions:
       test.dinero: true
       test.pagar: true
       test.dardinero: true
+      test.quitardinero: true
