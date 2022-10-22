@@ -775,7 +775,7 @@ public class Main extends JavaPlugin implements Listener {
           sender.sendMessage("§4Tienes que indicar a quien vas a pagar y cuanto vas a pagar.");
           return true;
         }
-        else if (Bukkit.getPlayer(args[0]) != null) {
+        else if (Bukkit.getPlayer(args[0]) != null && p != Bukkit.getPlayer(args[0])) {
           Double dineros = Double.valueOf(args[1])>0 ? Double.valueOf(args[1]) : Double.valueOf(args[1])*-1;
           Player o = Bukkit.getPlayer(args[0]);
           if(econ.getBalance(p)>=dineros){
